@@ -1,5 +1,11 @@
 ---
+import { getEntry } from "astro:content";
 
+const landing = (await getEntry("landing", "ru"))!;
+if (!landing) {
+  throw new Error("Could not find landing page content");
+}
+const { header } = landing.data;
 ---
 
 <header
@@ -21,48 +27,38 @@
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex space-x-8">
-        <a
-          href="#services"
-          class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-          >Услуги</a
-        >
-        <a
-          href="#cases"
-          class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-          >Кейсы</a
-        >
-        <a
-          href="#tech"
-          class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-          >Технологии</a
-        >
-        <a
-          href="#about"
-          class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
-          >Компания</a
-        >
+        {
+          header.nav.map((item) => (
+            <a
+              href={item.href}
+              class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+            >
+              {item.label}
+            </a>
+          ))
+        }
       </nav>
 
       <!-- Desktop Actions -->
       <div class="hidden md:flex items-center space-x-6">
         <a
-          href="tel:+79999999999"
+          href={header.phoneHref}
           class="text-gray-600 hover:text-gray-900 font-medium transition-colors"
         >
-          +7 (999) 999-99-99
+          {header.phone}
         </a>
         <a
           href="#contacts"
           class="inline-flex items-center justify-center px-5 py-2.5 border border-transparent rounded-lg text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 transition-all shadow-sm hover:shadow-md"
         >
-          Обсудить проект
+          {header.ctaButton}
         </a>
       </div>
 
       <!-- Mobile menu button -->
       <div class="flex items-center md:hidden">
         <a
-          href="tel:+79999999999"
+          href={header.phoneHref}
           class="mr-4 text-gray-600 hover:text-gray-900"
         >
           <!-- Phone Icon -->
@@ -132,39 +128,29 @@
     id="mobile-menu"
   >
     <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
-      <a
-        href="#services"
-        class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-        >Услуги</a
-      >
-      <a
-        href="#cases"
-        class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-        >Кейсы</a
-      >
-      <a
-        href="#tech"
-        class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-        >Технологии</a
-      >
-      <a
-        href="#about"
-        class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-        >Компания</a
-      >
+      {
+        header.nav.map((item) => (
+          <a
+            href={item.href}
+            class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+          >
+            {item.label}
+          </a>
+        ))
+      }
 
       <div class="mt-6 pt-6 border-t border-gray-100 flex flex-col gap-4">
         <a
-          href="tel:+79999999999"
+          href={header.phoneHref}
           class="block px-3 text-base font-semibold text-gray-900"
         >
-          +7 (999) 999-99-99
+          {header.phone}
         </a>
         <a
           href="#contacts"
           class="mobile-link w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-gray-800"
         >
-          Обсудить проект
+          {header.ctaButton}
         </a>
       </div>
     </div>

@@ -1,5 +1,11 @@
 ---
+import { getEntry } from "astro:content";
 
+const landing = (await getEntry("landing", "ru"))!;
+if (!landing) {
+  throw new Error("Could not find landing page content");
+}
+const { hero } = landing.data;
 ---
 
 <section
@@ -11,54 +17,42 @@
       <h1
         class="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-tight mb-6"
       >
-        Разрабатываем программное обеспечение для роста вашего бизнеса.
+        {hero.title}
       </h1>
 
       <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-        Превращаем идеи в цифровые продукты: разработка web сервисов, мобильных
-        и настольных приложений под ключ.
+        {hero.subtitle}
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 mb-10">
-        <div class="flex items-center text-brand-dark font-medium">
-          <svg
-            class="w-5 h-5 text-brand-primary mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 13l4 4L19 7"></path>
-          </svg>
-          ФИКСИРОВАННАЯ СТОИМОСТЬ
-        </div>
-        <div class="flex items-center text-brand-dark font-medium">
-          <svg
-            class="w-5 h-5 text-brand-primary mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 13l4 4L19 7"></path>
-          </svg>
-          ГАРАНТИЯ 12 МЕСЯЦЕВ
-        </div>
+        {
+          hero.benefits.map((benefit) => (
+            <div class="flex items-center text-brand-dark font-medium">
+              <svg
+                class="w-5 h-5 text-brand-primary mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              {benefit}
+            </div>
+          ))
+        }
       </div>
 
       <a
         href="#contacts"
         class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-brand-accent hover:bg-red-700 transition-all rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
       >
-        Заказать расчет проекта
+        {hero.ctaButton}
       </a>
     </div>
   </div>
