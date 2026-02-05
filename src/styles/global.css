@@ -50,6 +50,9 @@
 
 @theme {
   --font-sans: "Acrom", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-brand-dark: #001C5C;
+  --color-brand-primary: #008FFF;
+  --color-brand-accent: #DA000F;
 }
 
 html {
