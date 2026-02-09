@@ -2,13 +2,13 @@
 header:
   nav:
     - label: "Услуги"
-      href: "#services"
+      href: "/#services"
     - label: "Кейсы"
-      href: "#cases"
+      href: "/#cases"
     - label: "Технологии"
-      href: "#tech"
+      href: "/#tech"
     - label: "Компания"
-      href: "#about"
+      href: "/#about"
   phone: "+7 (999) 999-99-99"
   phoneHref: "tel:+79999999999"
   ctaButton: "Обсудить проект"
@@ -80,7 +80,7 @@ footer:
     inn: "7700000000"
     kpp: "770001001"
     ogrn: "1027700000000"
-    privacyPolicy: "#privacy"
-    userAgreement: "#terms"
+    privacyPolicy: "/privacy"
+    userAgreement: "/terms"
   copyright: "© Визор-Тех"
 ---
