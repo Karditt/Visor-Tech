@@ -1,0 +1,123 @@
+---
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import logo from "../../assets/icons/logo-white.svg";
+
+const landing = await getEntry("landing", "ru");
+if (!landing) {
+  throw new Error("Could not find landing page content");
+}
+const { footer, header } = landing.data;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      {/* Brand Column */}
+      <div class="space-y-6">
+        <a href="/" class="inline-block hover:opacity-80 transition-opacity">
+          <Image src={logo} alt="Visor-Tech" class="h-10 w-auto" />
+        </a>
+        <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
+          {footer.slogan}
+        </p>
+      </div>
+
+      {/* Navigation Column */}
+      <div>
+        <h3 class="text-lg font-semibold mb-6 text-white">Меню</h3>
+        <nav class="flex flex-col space-y-3">
+          {
+            header.nav.map((item) => (
+              <a
+                href={item.href}
+                class="text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      {/* Legal Info Column */}
+      <div>
+        <h3 class="text-lg font-semibold mb-6 text-white">Реквизиты</h3>
+        <div class="space-y-3 text-sm text-gray-400">
+          <p class="font-medium text-white">{footer.legal.name}</p>
+          <p>ИНН: {footer.legal.inn}</p>
+          <p>КПП: {footer.legal.kpp}</p>
+          <p>ОГРН: {footer.legal.ogrn}</p>
+        </div>
+      </div>
+
+      {/* Documents Column */}
+      <div>
+        <h3 class="text-lg font-semibold mb-6 text-white">Документы</h3>
+        <div class="flex flex-col space-y-3">
+          <a
+            href={footer.legal.privacyPolicy}
+            class="text-gray-400 hover:text-white transition-colors text-sm"
+          >
+            Политика конфиденциальности
+          </a>
+          <a
+            href={footer.legal.userAgreement}
+            class="text-gray-400 hover:text-white transition-colors text-sm"
+          >
+            Пользовательское соглашение
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div
+      class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+    >
+      <p class="text-gray-500 text-sm">
+        {footer.copyright}, {currentYear}. Все права защищены.
+      </p>
+
+      {/* Back to Top Button */}
+      <button
+        id="back-to-top"
+        class="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-medium"
+        aria-label="Вернуться наверх"
+      >
+        <span>Наверх</span>
+        <div
+          class="p-2 rounded-full border border-gray-700 group-hover:border-white group-hover:bg-white group-hover:text-gray-900 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const backToTopBtn = document.getElementById("back-to-top");
+
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+</script>

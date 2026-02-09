@@ -61,6 +61,18 @@ const landingCollection = defineCollection({
       workingHours: z.string(),
       mapEmbedUrl: z.string(),
     }),
+    footer: z.object({
+      slogan: z.string(),
+      legal: z.object({
+        name: z.string(),
+        inn: z.string(),
+        kpp: z.string(),
+        ogrn: z.string(),
+        privacyPolicy: z.string(),
+        userAgreement: z.string(),
+      }),
+      copyright: z.string(),
+    }),
   }),
 });
 

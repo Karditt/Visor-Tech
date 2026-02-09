@@ -72,4 +72,15 @@ about:
   email: "info@visor-tech.ru"
   workingHours: "Пн-Пт: 10:00 - 19:00"
   mapEmbedUrl: "https://yandex.ru/map-widget/v1/?um=constructor%3A08b3367981545672952504828114674751474936647265818987483664726581&amp;source=constructor" # Placeholder map URL
+
+footer:
+  slogan: "Разрабатываем программное обеспечение для роста вашего бизнеса"
+  legal:
+    name: "ООО “Визор-Тех”"
+    inn: "7700000000"
+    kpp: "770001001"
+    ogrn: "1027700000000"
+    privacyPolicy: "#privacy"
+    userAgreement: "#terms"
+  copyright: "© Визор-Тех"
 ---
