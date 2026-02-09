@@ -1,5 +1,7 @@
 ---
 import { getEntry } from "astro:content";
+import logo from "../../assets/icons/logo.svg";
+import { Image } from "astro:assets";
 
 const landing = (await getEntry("landing", "ru"))!;
 if (!landing) {
@@ -21,7 +23,7 @@ const { header } = landing.data;
           aria-label="Visor-Tech Contacts"
           class="hover:opacity-80 transition-opacity"
         >
-          <img src="/icons/logo.svg" alt="Visor-Tech" class="h-12 w-auto" />
+          <Image src={logo} alt="Visor-Tech" class="h-12 w-auto" />
         </a>
       </div>
 

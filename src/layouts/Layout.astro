@@ -7,24 +7,14 @@ import Header from "../components/astro/Header.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Visor-Tech</title>
   </head>
   <body class="w-full overflow-x-hidden bg-white text-gray-900 antialiased">
     <Header />
-    <header></header>
     <main class="w-full">
       <slot />
     </main>
   </body>
 </html>
-
-<!-- <style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style> -->
