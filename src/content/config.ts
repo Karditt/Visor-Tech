@@ -52,6 +52,15 @@ const landingCollection = defineCollection({
         }),
       ),
     }),
+    about: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(), // Added optional subtitle just in case
+      address: z.string(),
+      phone: z.string(),
+      email: z.string(),
+      workingHours: z.string(),
+      mapEmbedUrl: z.string(),
+    }),
   }),
 });
 
