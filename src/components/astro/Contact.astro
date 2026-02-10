@@ -1,16 +1,20 @@
 ---
 import ContactForm from "../react/ContactForm";
+import { getLandingData } from "../../lib/data";
+
+const landing = await getLandingData();
+const { contactForm } = landing;
 ---
 
 <section id="contacts" class="py-16 md:py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        Обсудите ваш проект с нами
+        {contactForm.title}
       </h2>
       <div class="w-24 h-1 bg-blue-600 mx-auto rounded mb-6"></div>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Заполните форму, и мы свяжемся с вами для обсуждения деталей.
+        {contactForm.subtitle}
       </p>
     </div>
 

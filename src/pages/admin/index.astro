@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AdminEditor from "../../components/react/AdminEditor";
+import { COOKIE_NAME, verifyToken } from "../../lib/auth";
+
+// Server-side Auth Check
+const token = Astro.cookies.get(COOKIE_NAME)?.value;
+if (!token) {
+  return Astro.redirect("/admin/login");
+}
+const payload = await verifyToken(token);
+if (!payload) {
+  return Astro.redirect("/admin/login");
+}
+---
+
+<Layout>
+  <div class="min-h-screen bg-gray-50 pt-28">
+    <AdminEditor client:only="react" />
+  </div>
+</Layout>

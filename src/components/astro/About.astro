@@ -1,13 +1,8 @@
 ---
-import { getEntry } from "astro:content";
+import { getLandingData } from "../../lib/data";
 
-const landing = await getEntry("landing", "ru");
-
-if (!landing) {
-  throw new Error("Could not find landing page content");
-}
-
-const { about } = landing.data;
+const landing = await getLandingData();
+const { about } = landing;
 ---
 
 <section id="about" class="py-16 bg-white">

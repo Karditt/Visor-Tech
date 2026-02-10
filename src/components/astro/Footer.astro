@@ -1,13 +1,10 @@
 ---
-import { getEntry } from "astro:content";
+import { getLandingData } from "../../lib/data";
 import { Image } from "astro:assets";
 import logo from "../../assets/icons/logo-white.svg";
 
-const landing = await getEntry("landing", "ru");
-if (!landing) {
-  throw new Error("Could not find landing page content");
-}
-const { footer, header } = landing.data;
+const landing = await getLandingData();
+const { footer, header } = landing;
 const currentYear = new Date().getFullYear();
 ---
 

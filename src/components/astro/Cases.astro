@@ -1,16 +1,8 @@
 ---
-import { getEntry } from "astro:content";
+import { getLandingData } from "../../lib/data";
 
-const landing = (await getEntry("landing", "ru"))!;
-if (!landing) {
-  throw new Error("Could not find landing page content");
-}
-const { cases } = landing.data;
-
-if (!cases) {
-  // Gracefull fallback or error during development
-  throw new Error("Cases data is missing from landing content");
-}
+const landing = await getLandingData();
+const { cases } = landing;
 ---
 
 <section id="cases" class="py-16 md:py-24 bg-white">
