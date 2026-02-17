@@ -81,6 +81,6 @@ footer:
     kpp: "770001001"
     ogrn: "1027700000000"
     privacyPolicy: "/privacy"
-    userAgreement: "/terms"
+    userAgreement: "/user-agreement"
   copyright: "© Визор-Тех"
 ---

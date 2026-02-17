@@ -33,15 +33,15 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Construct Telegram message
     const text = `
-📩 *New Contact Request*
+📩 *Новая заявка*
 
-👤 *Name:* ${name}
-🏢 *Company:* ${company || "N/A"}
-📞 *Contact:* ${contact}
-📝 *Description:*
+👤 *Имя:* ${name}
+🏢 *Компания:* ${company || "N/A"}
+📞 *Контакт:* ${contact}
+📝 *Описание:*
 ${description || "N/A"}
 
-📢 *Subscribe to news:* ${news ? "Yes" : "No"}
+📢 *Подписаться на новости:* ${news ? "Да" : "Нет"}
     `.trim();
 
     const BOT_TOKEN = import.meta.env.TELEGRAM_BOT_TOKEN;
