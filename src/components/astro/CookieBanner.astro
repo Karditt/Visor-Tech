@@ -1,0 +1,57 @@
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] transform translate-y-full transition-transform duration-500 ease-in-out max-w-[100vw]"
+>
+  <div
+    class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8"
+  >
+    <div class="text-gray-600 text-sm md:text-base text-left flex-1">
+      <p class="mb-2 md:mb-0 leading-relaxed">
+        Пользуясь сайтом, Вы принимаете условия <a
+          href="/user-agreement"
+          class="text-[#3b82f6] hover:underline font-medium"
+          >пользовательского соглашения</a
+        >.
+      </p>
+      <p>
+        Вы можете согласиться на обработку аналитических cookie-файлов, чтобы мы
+        могли сделать сайт лучше.
+      </p>
+    </div>
+    <div class="w-full md:w-auto flex-shrink-0">
+      <button
+        id="cookie-accept"
+        class="w-full md:w-auto px-8 py-3 bg-[#3b82f6] hover:bg-blue-600 text-white rounded-xl font-medium transition-all shadow-lg shadow-blue-500/30 active:scale-[0.98] whitespace-nowrap"
+      >
+        Принять
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const banner = document.getElementById("cookie-banner");
+  const acceptButton = document.getElementById("cookie-accept");
+  const storageKey = "cookieConsent";
+
+  // Check if user has already accepted cookies
+  const hasConsented = localStorage.getItem(storageKey);
+
+  if (!hasConsented) {
+    // Show banner with a small delay for animation
+    setTimeout(() => {
+      banner?.classList.remove("translate-y-full");
+    }, 1000);
+  }
+
+  // Handle accept click
+  acceptButton?.addEventListener("click", () => {
+    localStorage.setItem(storageKey, "true");
+    banner?.classList.add("translate-y-full");
+
+    // Remove from DOM after animation
+    setTimeout(() => {
+      banner?.remove();
+    }, 500);
+  });
+</script>
