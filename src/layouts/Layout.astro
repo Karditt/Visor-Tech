@@ -2,15 +2,38 @@
 import "../styles/global.css";
 import Header from "../components/astro/Header.astro";
 import CookieBanner from "../components/astro/CookieBanner.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = "/assets/icons/logo.svg" } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/logo.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Visor-Tech</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
   </head>
   <body class="w-full overflow-x-hidden bg-white text-gray-900 antialiased">
     <Header />
