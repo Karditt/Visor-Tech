@@ -1,5 +1,7 @@
 ---
 import { getLandingData } from "../../lib/data";
+import { Image } from "astro:assets";
+import bgImage from "../../assets/images/background.png";
 
 const landing = await getLandingData();
 const { hero } = landing;
@@ -7,26 +9,39 @@ const { hero } = landing;
 
 <section
   id="hero"
-  class="bg-white pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden"
+  class="relative bg-brand-dark min-h-screen flex items-center pt-20 pb-16 overflow-hidden"
 >
+  <!-- Background Image with Astro Optimization -->
+  <div class="absolute inset-0 z-0 bg-[#0A0F1A]">
+    <!-- Added a dark background color behind the image in case it doesn't cover everything -->
+    <Image
+      src={bgImage}
+      alt="Hero Background"
+      class="w-full h-full object-cover object-center translate-x-[15%] md:translate-x-0 opacity-100 mix-blend-screen"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <div class="lg:w-2/3 xl:w-1/2 relative z-10">
+    <div
+      class="inline-block relative z-10 p-6 md:p-10 rounded-3xl bg-white/70 backdrop-blur-md shadow-2xl border border-white/40 max-w-2xl lg:max-w-3xl"
+    >
       <h1
-        class="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark leading-tight mb-6"
+        class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark leading-tight mb-6 drop-shadow-sm"
       >
         {hero.title}
       </h1>
 
-      <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
+      <p class="text-lg md:text-xl text-gray-800 mb-8 max-w-2xl font-medium">
         {hero.subtitle}
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 mb-10">
         {
           hero.benefits.map((benefit) => (
-            <div class="flex items-center text-brand-dark font-medium">
+            <div class="flex items-center text-brand-dark font-bold bg-white/50 px-3 py-1.5 rounded-lg border border-white/40">
               <svg
-                class="w-5 h-5 text-brand-primary mr-2"
+                class="w-5 h-5 text-brand-primary mr-2 drop-shadow-sm"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -52,17 +67,5 @@ const { hero } = landing;
         {hero.ctaButton}
       </a>
     </div>
-  </div>
-
-  <!-- Background decoration (abstract gradient/shape) -->
-  <div
-    class="absolute top-0 right-0 -z-0 opacity-10 translate-x-1/4 -translate-y-1/4 pointer-events-none"
-  >
-    <svg
-      viewBox="0 0 1000 1000"
-      class="w-[800px] h-[800px] text-brand-primary fil-current"
-    >
-      <circle cx="500" cy="500" r="500" fill="currentColor"></circle>
-    </svg>
   </div>
 </section>
