@@ -18,8 +18,8 @@
         "href": "/#about"
       }
     ],
-    "phone": "+7 (999) 999-99-99",
-    "phoneHref": "tel:+79999999999",
+    "phone": "+7 (495) 642-54-13",
+    "phoneHref": "tel:+74956425413",
     "ctaButton": "Обсудить проект"
   },
   "hero": {
@@ -116,8 +116,8 @@
     "title": "Контакты",
     "subtitle": "Мы всегда на связи и готовы ответить на ваши вопросы.",
     "address": "г. Москва, ул. Измайловский Вал д.30, пом. 2/1",
-    "phone": "+7 (999) 999-99-99",
-    "email": "info@visor-tech.ru",
+    "phone": "+7 (495) 642-54-13",
+    "email": "info@vizortex.ru",
     "workingHours": "Пн-Пт: 10:00 - 19:00",
     "mapEmbedUrl": "https://yandex.ru/map-widget/v1/?um=constructor%3A08b3367981545672952504828114674751474936647265818987483664726581&amp;source=constructor"
   },
@@ -129,9 +129,9 @@
     "slogan": "Разрабатываем программное обеспечение для роста вашего бизнеса",
     "legal": {
       "name": "ООО «Визор-Тех»",
-      "inn": "7710140679",
-      "kpp": "770001001",
-      "ogrn": "1027700000000",
+      "inn": "9719078644",
+      "kpp": "771901001",
+      "ogrn": "1257700169506",
       "privacyPolicy": "/privacy",
       "userAgreement": "/user-agreement"
     },

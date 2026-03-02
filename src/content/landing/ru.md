@@ -69,7 +69,7 @@ about:
   subtitle: "Мы всегда на связи и готовы ответить на ваши вопросы."
   address: "г. Москва, ул. Пушкина, д. 10, оф. 305"
   phone: "+7 (999) 999-99-99"
-  email: "info@visor-tech.ru"
+  email: "info@vizortex.ru"
   workingHours: "Пн-Пт: 10:00 - 19:00"
   mapEmbedUrl: "https://yandex.ru/map-widget/v1/?um=constructor%3A08b3367981545672952504828114674751474936647265818987483664726581&amp;source=constructor" # Placeholder map URL
 

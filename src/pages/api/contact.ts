@@ -11,7 +11,7 @@ const contactSchema = z.object({
   privacy: z.boolean().refine((val) => val === true, {
     message: "You must agree to the privacy policy",
   }),
-  news: z.boolean().optional(),
+  honeypot: z.string().optional(),
 });
 
 export const POST: APIRoute = async ({ request }) => {
@@ -29,7 +29,15 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const { name, company, contact, description, news } = result.data;
+    const { name, company, contact, description, honeypot } = result.data;
+
+    if (honeypot) {
+      console.warn("Honeypot filled, rejecting submission as spam.");
+      return new Response(
+        JSON.stringify({ message: "Message sent successfully" }), // Fake success to bot
+        { status: 200 },
+      );
+    }
 
     // Construct Telegram message
     const text = `
@@ -40,8 +48,6 @@ export const POST: APIRoute = async ({ request }) => {
 📞 *Контакт:* ${contact}
 📝 *Описание:*
 ${description || "N/A"}
-
-📢 *Подписаться на новости:* ${news ? "Да" : "Нет"}
     `.trim();
 
     const BOT_TOKEN = import.meta.env.TELEGRAM_BOT_TOKEN;

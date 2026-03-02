@@ -11,7 +11,7 @@ const formSchema = z.object({
   privacy: z.boolean().refine((val) => val === true, {
     message: "Необходимо согласие",
   }),
-  news: z.boolean().optional(),
+  honeypot: z.string().optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -31,7 +31,6 @@ export default function ContactForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       privacy: false,
-      news: true,
     },
   });
 
@@ -91,6 +90,29 @@ export default function ContactForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Honeypot field - visually hidden but accessible to bots */}
+          <div
+            style={{
+              opacity: 0,
+              position: "absolute",
+              top: 0,
+              left: 0,
+              height: 0,
+              width: 0,
+              zIndex: -1,
+            }}
+            aria-hidden="true"
+          >
+            <label htmlFor="company-website">Official Website</label>
+            <input
+              id="company-website"
+              type="text"
+              autoComplete="off"
+              tabIndex={-1}
+              {...register("honeypot")}
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label
@@ -205,31 +227,6 @@ export default function ContactForm() {
                 {errors.privacy.message}
               </p>
             )}
-
-            <label className="flex items-start gap-3 cursor-pointer group">
-              <div className="relative flex items-center">
-                <input
-                  type="checkbox"
-                  {...register("news")}
-                  className="peer h-5 w-5 cursor-pointer appearance-none rounded border border-gray-300 shadow-sm checked:border-blue-600 checked:bg-blue-600 focus:ring-2 focus:ring-blue-100 focus:outline-none transition-all"
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="pointer-events-none absolute left-1/2 top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
-                >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
-                Хочу получать новости и анонсы
-              </span>
-            </label>
           </div>
 
           <div className="pt-4">
