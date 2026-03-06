@@ -40,11 +40,19 @@ function renderMaintenancePage(urlPath: string, showError = false) {
         <h1>Сайт на обслуживании</h1>
         <p>Мы проводим технические работы на сайте. Пожалуйста, введите пароль для доступа к сайту.</p>
         <div class="error">Неверный пароль. Попробуйте снова.</div>
-        <form action="/_maintenance-login?redirect=${encodeURIComponent(urlPath)}" method="POST">
-          <input type="password" name="password" placeholder="Введите пароль" required autofocus>
+        <form id="maintenance-form">
+          <input type="password" id="pwd-input" placeholder="Введите пароль" required autofocus>
           <button type="submit">Разблокировать сайт</button>
         </form>
       </div>
+      <script>
+        document.getElementById('maintenance-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var pwd = document.getElementById('pwd-input').value;
+          document.cookie = 'site_access=' + encodeURIComponent(pwd) + '; path=/; max-age=604800';
+          window.location.reload();
+        });
+      </script>
     </body>
     </html>
   `,
@@ -63,26 +71,22 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   const url = new URL(context.request.url);
 
-  // Handle login request
-  if (
-    context.request.method === "POST" &&
-    url.pathname === "/_maintenance-login"
-  ) {
-    const formData = await context.request.formData();
-    const password = formData.get("password");
-    const redirectPath = url.searchParams.get("redirect") || "/";
+  // Check auth
+  const accessCookie = context.cookies.get("site_access")?.value;
+  if (accessCookie === PASSWORD || accessCookie === "granted") {
+    // Keep 'granted' check for backward compatibility with previous logins
+    return next();
+  }
 
-    if (password === PASSWORD) {
-      context.cookies.set("site_access", "granted", {
-        path: "/",
-        httpOnly: true,
-        maxAge: 60 * 60 * 24 * 7, // 1 week
-      });
-      return context.redirect(redirectPath);
-    } else {
-      // Wrong password
-      return renderMaintenancePage(redirectPath, true);
-    }
+  // If there's an attempt but it failed
+  const showErr =
+    accessCookie !== undefined &&
+    accessCookie !== PASSWORD &&
+    accessCookie !== "granted";
+
+  // If failed, clear the wrong cookie immediately so it doesn't loop
+  if (showErr) {
+    context.cookies.delete("site_access", { path: "/" });
   }
 
   // Check auth
